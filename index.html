@@ -3,108 +3,218 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KENshop | Online Store</title>
-  <link rel="stylesheet" href="Style.css">
+  <title>KENshop | Affordable Online Shopping in Kenya</title>
+  <link rel="stylesheet" href="Style.css?v=3">
 </head>
 <body>
 
-  <!-- Top Navigation Bar -->
-  <header class="navbar">
-    <div class="logo">KEN<span>shop</span></div>
-
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Search for phones, shoes, electronics...">
+  <!-- Kilimall-Style Red App Header -->
+  <header class="kili-header">
+    <div class="header-top">
+      <div class="brand-logo">
+        <span class="bag-icon">🛍️</span> KEN<strong>shop</strong>
+      </div>
+      <div class="header-user">
+        <span id="userGreeting" class="user-greeting"></span>
+        <button id="openAuthBtn" class="header-btn">Sign In / Join</button>
+        <button id="logoutBtn" class="header-btn" style="display: none;">Log Out</button>
+      </div>
     </div>
 
-    <div class="nav-actions">
-      <span id="userGreeting" class="user-greeting"></span>
-      <button id="openAuthBtn" class="btn btn-primary">Sign Up / Log In</button>
-      <button id="logoutBtn" class="btn btn-outline" style="display: none;">Log Out</button>
+    <!-- Pill Search Bar -->
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search phones, shoes, electronics, deals...">
     </div>
   </header>
 
-  <!-- Main Storefront -->
-  <main class="container">
-    <section class="hero">
-      <h1>Welcome to KENshop</h1>
-      <p>Quality products delivered fast across Kenya.</p>
+  <!-- Main App Body -->
+  <main class="app-container">
+
+    <!-- Promo Banner -->
+    <section class="promo-banner">
+      <div class="promo-text">
+        <span class="promo-tag">NEW USER GIFT</span>
+        <h2>Big Deals! Up to 50% OFF</h2>
+        <p>Fast delivery across Kenya • Pay via M-Pesa</p>
+      </div>
+      <div class="promo-art">🎁</div>
     </section>
 
-    <h2>Featured Products</h2>
-    <p id="noResultsMsg" class="no-results" style="display: none;">No matching products found.</p>
+    <!-- Circular Category Quick Icons (Clickable Filter) -->
+    <section class="category-row">
+      <button class="cat-item active" data-category="all">
+        <div class="cat-circle" style="background:#ffe4e6;">🔥</div>
+        <span>All Deals</span>
+      </button>
+      <button class="cat-item" data-category="electronics">
+        <div class="cat-circle" style="background:#e0f2fe;">📱</div>
+        <span>Phones & Tech</span>
+      </button>
+      <button class="cat-item" data-category="footwear">
+        <div class="cat-circle" style="background:#fef3c7;">👟</div>
+        <span>Shoes</span>
+      </button>
+      <button class="cat-item" data-category="accessories">
+        <div class="cat-circle" style="background:#f3e8ff;">🎧</div>
+        <span>Audio</span>
+      </button>
+      <button class="cat-item" data-category="home">
+        <div class="cat-circle" style="background:#dcfce7;">🏠</div>
+        <span>Home</span>
+      </button>
+      <button class="cat-item" data-category="fashion">
+        <div class="cat-circle" style="background:#ffedd5;">🎒</div>
+        <span>Fashion</span>
+      </button>
+    </section>
 
-    <!-- Product Grid -->
+    <!-- Flash Sale Header Strip -->
+    <section class="flash-header">
+      <div class="flash-title">
+        <span>⚡ FLASH SALE</span>
+        <span class="countdown" id="flashTimer">02 : 45 : 19</span>
+      </div>
+      <span class="see-all">Ends Soon &gt;</span>
+    </section>
+
+    <p id="noResultsMsg" class="no-results" style="display: none;">No matching products found on KENshop.</p>
+
+    <!-- 2-Column App Product Grid -->
     <div class="product-grid" id="productGrid">
-      <div class="product-card">
-        <div class="product-badge">Electronics</div>
-        <h3>Samsung Galaxy A15</h3>
-        <p class="desc">128GB Storage, 6.5" Super AMOLED Display, 5000mAh Battery.</p>
-        <div class="price">KES 21,500</div>
-        <button class="btn btn-buy" onclick="alert('Added Samsung Galaxy A15 to cart!')">Add to Cart</button>
+      
+      <div class="product-card" data-category="electronics">
+        <div class="discount-tag">-22%</div>
+        <div class="product-img">📱</div>
+        <div class="product-info">
+          <span class="fulfill-badge">Fulfilled by KENshop</span>
+          <h3>Samsung Galaxy A15 (128GB)</h3>
+          <div class="price-row">
+            <span class="current-price">KSh 21,500</span>
+            <span class="old-price">KSh 27,500</span>
+          </div>
+          <div class="sold-text">142 sold • ⭐ 4.8</div>
+          <button class="btn-buy" data-name="Samsung Galaxy A15" data-price="21500">+ Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-badge">Footwear</div>
-        <h3>Men's Running Sneakers</h3>
-        <p class="desc">Lightweight breathable mesh athletic shoes for daily wear.</p>
-        <div class="price">KES 3,200</div>
-        <button class="btn btn-buy" onclick="alert('Added Running Sneakers to cart!')">Add to Cart</button>
+      <div class="product-card" data-category="footwear">
+        <div class="discount-tag">-36%</div>
+        <div class="product-img">👟</div>
+        <div class="product-info">
+          <span class="fulfill-badge">Hot Deal</span>
+          <h3>Men's Breathable Running Sneakers</h3>
+          <div class="price-row">
+            <span class="current-price">KSh 3,200</span>
+            <span class="old-price">KSh 5,000</span>
+          </div>
+          <div class="sold-text">89 sold • ⭐ 4.6</div>
+          <button class="btn-buy" data-name="Running Sneakers" data-price="3200">+ Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-badge">Accessories</div>
-        <h3>Wireless Bluetooth Earbuds</h3>
-        <p class="desc">Noise-cancelling earbuds with 24-hour charging case.</p>
-        <div class="price">KES 1,800</div>
-        <button class="btn btn-buy" onclick="alert('Added Wireless Earbuds to cart!')">Add to Cart</button>
+      <div class="product-card" data-category="accessories">
+        <div class="discount-tag">-40%</div>
+        <div class="product-img">🎧</div>
+        <div class="product-info">
+          <span class="fulfill-badge">Fulfilled by KENshop</span>
+          <h3>Wireless Noise-Cancelling Earbuds</h3>
+          <div class="price-row">
+            <span class="current-price">KSh 1,800</span>
+            <span class="old-price">KSh 3,000</span>
+          </div>
+          <div class="sold-text">310 sold • ⭐ 4.9</div>
+          <button class="btn-buy" data-name="Wireless Earbuds" data-price="1800">+ Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-badge">Home & Kitchen</div>
-        <h3>Electric Kettle 1.8L</h3>
-        <p class="desc">Fast-boiling stainless steel cordless kettle with auto shut-off.</p>
-        <div class="price">KES 1,450</div>
-        <button class="btn btn-buy" onclick="alert('Added Electric Kettle to cart!')">Add to Cart</button>
+      <div class="product-card" data-category="home">
+        <div class="discount-tag">-28%</div>
+        <div class="product-img">🫖</div>
+        <div class="product-info">
+          <span class="fulfill-badge">Flash Deal</span>
+          <h3>Stainless Electric Kettle 1.8L</h3>
+          <div class="price-row">
+            <span class="current-price">KSh 1,450</span>
+            <span class="old-price">KSh 2,000</span>
+          </div>
+          <div class="sold-text">205 sold • ⭐ 4.7</div>
+          <button class="btn-buy" data-name="Electric Kettle 1.8L" data-price="1450">+ Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-badge">Fashion</div>
-        <h3>Classic Leather Backpack</h3>
-        <p class="desc">Water-resistant laptop backpack fits up to 15.6-inch laptops.</p>
-        <div class="price">KES 2,900</div>
-        <button class="btn btn-buy" onclick="alert('Added Leather Backpack to cart!')">Add to Cart</button>
+      <div class="product-card" data-category="fashion">
+        <div class="discount-tag">-31%</div>
+        <div class="product-img">🎒</div>
+        <div class="product-info">
+          <span class="fulfill-badge">Fulfilled by KENshop</span>
+          <h3>Waterproof Laptop Backpack 15.6"</h3>
+          <div class="price-row">
+            <span class="current-price">KSh 2,900</span>
+            <span class="old-price">KSh 4,200</span>
+          </div>
+          <div class="sold-text">74 sold • ⭐ 4.8</div>
+          <button class="btn-buy" data-name="Laptop Backpack" data-price="2900">+ Add to Cart</button>
+        </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-badge">Electronics</div>
-        <h3>Smart Fitness Watch</h3>
-        <p class="desc">Heart rate monitor, step counter, and WhatsApp notifications.</p>
-        <div class="price">KES 2,500</div>
-        <button class="btn btn-buy" onclick="alert('Added Smart Fitness Watch to cart!')">Add to Cart</button>
+      <div class="product-card" data-category="electronics">
+        <div class="discount-tag">-45%</div>
+        <div class="product-img">⌚</div>
+        <div class="product-info">
+          <span class="fulfill-badge">Hot Deal</span>
+          <h3>Smart Fitness Watch & Tracker</h3>
+          <div class="price-row">
+            <span class="current-price">KSh 2,500</span>
+            <span class="old-price">KSh 4,500</span>
+          </div>
+          <div class="sold-text">418 sold • ⭐ 4.9</div>
+          <button class="btn-buy" data-name="Smart Fitness Watch" data-price="2500">+ Add to Cart</button>
+        </div>
       </div>
+
     </div>
   </main>
 
-  <!-- Sign Up / Log In Popup Modal -->
+  <!-- Kilimall-Style Bottom App Navigation Bar -->
+  <nav class="bottom-nav">
+    <button class="nav-tab active" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+      <span class="tab-icon">🏠</span>
+      <span>Home</span>
+    </button>
+    <button class="nav-tab" onclick="document.getElementById('searchInput').focus()">
+      <span class="tab-icon">🔍</span>
+      <span>Search</span>
+    </button>
+    <button class="nav-tab" id="cartNavBtn">
+      <span class="tab-icon">🛒 <span id="cartCount" class="cart-badge">0</span></span>
+      <span>Cart</span>
+    </button>
+    <button class="nav-tab" id="accountNavBtn">
+      <span class="tab-icon">👤</span>
+      <span>Account</span>
+    </button>
+  </nav>
+
+  <!-- Sign Up / Log In Modal -->
   <div id="authModal" class="modal" style="display: none;">
     <div class="modal-content">
       <span id="closeModalBtn" class="close-btn">&times;</span>
-      <h2>KENshop Account</h2>
-      <p class="modal-sub">Create a new account or log in to existing one</p>
+      <div class="modal-brand">🛍️ KENshop Account</div>
+      <p class="modal-sub">Sign in or register for New User Vouchers</p>
 
-      <input type="email" id="authEmail" placeholder="Email address" required>
-      <input type="password" id="authPassword" placeholder="Password (at least 6 characters)" required>
+      <input type="email" id="authEmail" placeholder="Enter your email address" required>
+      <input type="password" id="authPassword" placeholder="Password (min. 6 characters)" required>
 
       <div class="modal-buttons">
-        <button id="loginBtn" class="btn btn-primary">Log In</button>
-        <button id="signUpBtn" class="btn btn-secondary">Create Account</button>
+        <button id="loginBtn" class="btn-kili-red">Log In</button>
+        <button id="signUpBtn" class="btn-kili-orange">Sign Up</button>
       </div>
 
       <p id="authMessage" class="auth-message"></p>
     </div>
   </div>
 
-  <!-- Module Script -->
-  <script type="module" src="Script.js"></script>
+  <script type="module" src="Script.js?v=3"></script>
 </body>
 </html>
