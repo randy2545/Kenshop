@@ -3,108 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KENshop - Best Deals in Kandiege</title>
-  <!-- Links your CSS file -->
+  <title>KENshop | Online Store</title>
   <link rel="stylesheet" href="Style.css">
 </head>
 <body>
 
-  <!-- Top Bar -->
-  <div class="top-bar">
-    <span>Welcome to Kenshop! Shop the best deals in Kandiege</span>
-    <div class="top-links">
-      <a href="#">Help center</a>
-      <a href="#">Sell on Kenshop</a>
-      <a href="#">Login</a>
-      <a href="#">Sign up</a>
-    </div>
-  </div>
-
-  <!-- Main Header -->
-  <header class="main-header">
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
     <div class="logo">KEN<span>shop</span></div>
+
     <div class="search-box">
-      <input type="text" id="search-input" onkeyup="searchProducts()" placeholder="Search for products, brands and categories">
-      <button onclick="searchProducts()">Search</button>
+      <input type="text" id="searchInput" placeholder="Search for phones, shoes, electronics...">
     </div>
-    <button class="cart-btn">🛒 Cart (<span id="cart-count">0</span>)</button>
+
+    <div class="nav-actions">
+      <span id="userGreeting" class="user-greeting"></span>
+      <button id="openAuthBtn" class="btn btn-primary">Sign Up / Log In</button>
+      <button id="logoutBtn" class="btn btn-outline" style="display: none;">Log Out</button>
+    </div>
   </header>
 
-  <!-- Navigation Menu -->
-  <nav class="nav-bar">
-    <a href="#">Home</a>
-    <a href="#">Flash Sales</a>
-    <a href="#">New Arrivals</a>
-    <a href="#">Electronics</a>
-    <a href="#">Fashion</a>
-    <a href="#">Home & Kitchen</a>
-    <a href="#">Phone & Tablets</a>
-  </nav>
+  <!-- Main Storefront -->
+  <main class="container">
+    <section class="hero">
+      <h1>Welcome to KENshop</h1>
+      <p>Quality products delivered fast across Kenya.</p>
+    </section>
 
-  <!-- Hero Section: Categories on Left, Banner on Right -->
-  <div class="hero-section">
-    <aside class="categories">
-      <h3>Categories</h3>
-      <ul>
-        <li>💻 Electronics</li>
-        <li>👗 Women's Fashion</li>
-        <li>👔 Men's Fashion</li>
-        <li>🏠 Home & Kitchen</li>
-        <li>🧸 Toys & Games</li>
-        <li>💄 Beauty & Personal Care</li>
-        <li>📚 Books & Stationery</li>
-      </ul>
-    </aside>
+    <h2>Featured Products</h2>
+    <p id="noResultsMsg" class="no-results" style="display: none;">No matching products found.</p>
 
-    <div class="flash-banner">
-      <h1>Big flash sale!</h1>
-      <p>Up to 50% off on phones, fashion and electronics. Today only!</p>
-      <button onclick="document.getElementById('product-list').scrollIntoView()">Shop Now</button>
+    <!-- Product Grid -->
+    <div class="product-grid" id="productGrid">
+      <div class="product-card">
+        <div class="product-badge">Electronics</div>
+        <h3>Samsung Galaxy A15</h3>
+        <p class="desc">128GB Storage, 6.5" Super AMOLED Display, 5000mAh Battery.</p>
+        <div class="price">KES 21,500</div>
+        <button class="btn btn-buy" onclick="alert('Added Samsung Galaxy A15 to cart!')">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <div class="product-badge">Footwear</div>
+        <h3>Men's Running Sneakers</h3>
+        <p class="desc">Lightweight breathable mesh athletic shoes for daily wear.</p>
+        <div class="price">KES 3,200</div>
+        <button class="btn btn-buy" onclick="alert('Added Running Sneakers to cart!')">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <div class="product-badge">Accessories</div>
+        <h3>Wireless Bluetooth Earbuds</h3>
+        <p class="desc">Noise-cancelling earbuds with 24-hour charging case.</p>
+        <div class="price">KES 1,800</div>
+        <button class="btn btn-buy" onclick="alert('Added Wireless Earbuds to cart!')">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <div class="product-badge">Home & Kitchen</div>
+        <h3>Electric Kettle 1.8L</h3>
+        <p class="desc">Fast-boiling stainless steel cordless kettle with auto shut-off.</p>
+        <div class="price">KES 1,450</div>
+        <button class="btn btn-buy" onclick="alert('Added Electric Kettle to cart!')">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <div class="product-badge">Fashion</div>
+        <h3>Classic Leather Backpack</h3>
+        <p class="desc">Water-resistant laptop backpack fits up to 15.6-inch laptops.</p>
+        <div class="price">KES 2,900</div>
+        <button class="btn btn-buy" onclick="alert('Added Leather Backpack to cart!')">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <div class="product-badge">Electronics</div>
+        <h3>Smart Fitness Watch</h3>
+        <p class="desc">Heart rate monitor, step counter, and WhatsApp notifications.</p>
+        <div class="price">KES 2,500</div>
+        <button class="btn btn-buy" onclick="alert('Added Smart Fitness Watch to cart!')">Add to Cart</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Sign Up / Log In Popup Modal -->
+  <div id="authModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span id="closeModalBtn" class="close-btn">&times;</span>
+      <h2>KENshop Account</h2>
+      <p class="modal-sub">Create a new account or log in to existing one</p>
+
+      <input type="email" id="authEmail" placeholder="Email address" required>
+      <input type="password" id="authPassword" placeholder="Password (at least 6 characters)" required>
+
+      <div class="modal-buttons">
+        <button id="loginBtn" class="btn btn-primary">Log In</button>
+        <button id="signUpBtn" class="btn btn-secondary">Create Account</button>
+      </div>
+
+      <p id="authMessage" class="auth-message"></p>
     </div>
   </div>
 
-  <!-- Flash Sale Countdown Bar -->
-  <div class="flash-bar">
-    ⚡ Flash sale Ends in <span id="timer">04:23:59</span>
-  </div>
-
-  <!-- Product Grid -->
-  <div class="product-grid" id="product-list">
-    <div class="product-card" data-name="Android Smartphone">
-      <div class="img-placeholder">📱</div>
-      <h3>Android Smartphone</h3>
-      <p class="price">KSh 15,000</p>
-      <button onclick="addToCart('Android Smartphone')">Add to Cart</button>
-    </div>
-
-    <div class="product-card" data-name="Wireless Headphones">
-      <div class="img-placeholder">🎧</div>
-      <h3>Wireless Headphones</h3>
-      <p class="price">KSh 2,500</p>
-      <button onclick="addToCart('Wireless Headphones')">Add to Cart</button>
-    </div>
-
-    <div class="product-card" data-name="Men Sneakers">
-      <div class="img-placeholder">👟</div>
-      <h3>Men's Casual Sneakers</h3>
-      <p class="price">KSh 3,200</p>
-      <button onclick="addToCart('Men Sneakers')">Add to Cart</button>
-    </div>
-
-    <div class="product-card" data-name="Electric Kettle">
-      <div class="img-placeholder">🫖</div>
-      <h3>Electric Kettle</h3>
-      <p class="price">KSh 1,800</p>
-      <button onclick="addToCart('Electric Kettle')">Add to Cart</button>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    copyright © 2026 KENSHOP. All rights reserved. | Pay on delivery | Free returns within 3 days
-  </footer>
-
-  <!-- Links your JavaScript file (Always at the bottom before </body>) -->
-  <script src="Script.js"></script>
+  <!-- Module Script -->
+  <script type="module" src="Script.js"></script>
 </body>
 </html>
