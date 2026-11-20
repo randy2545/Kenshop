@@ -124,7 +124,7 @@ logoutBtn.addEventListener('click', async () => {
 
 // Listen for Login State Changes
 onAuthStateChanged(auth, (user) => {
-  if (user) {
+    if (user) {
     userGreeting.textContent = `Hi, ${user.email.split('@')[0]}`;
     openAuthBtn.style.display = 'none';
     logoutBtn.style.display = 'inline-block';
