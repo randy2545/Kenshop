@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KENshop - Best Deals in Kandiege</title>
+  <!-- Links your CSS file -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <span>Welcome to Kenshop! Shop the best deals in Kandiege</span>
+    <div class="top-links">
+      <a href="#">Help center</a>
+      <a href="#">Sell on Kenshop</a>
+      <a href="#">Login</a>
+      <a href="#">Sign up</a>
+    </div>
+  </div>
+
+  <!-- Main Header -->
+  <header class="main-header">
+    <div class="logo">KEN<span>shop</span></div>
+    <div class="search-box">
+      <input type="text" id="search-input" onkeyup="searchProducts()" placeholder="Search for products, brands and categories">
+      <button onclick="searchProducts()">Search</button>
+    </div>
+    <button class="cart-btn">🛒 Cart (<span id="cart-count">0</span>)</button>
+  </header>
+
+  <!-- Navigation Menu -->
+  <nav class="nav-bar">
+    <a href="#">Home</a>
+    <a href="#">Flash Sales</a>
+    <a href="#">New Arrivals</a>
+    <a href="#">Electronics</a>
+    <a href="#">Fashion</a>
+    <a href="#">Home & Kitchen</a>
+    <a href="#">Phone & Tablets</a>
+  </nav>
+
+  <!-- Hero Section: Categories on Left, Banner on Right -->
+  <div class="hero-section">
+    <aside class="categories">
+      <h3>Categories</h3>
+      <ul>
+        <li>💻 Electronics</li>
+        <li>👗 Women's Fashion</li>
+        <li>👔 Men's Fashion</li>
+        <li>🏠 Home & Kitchen</li>
+        <li>🧸 Toys & Games</li>
+        <li>💄 Beauty & Personal Care</li>
+        <li>📚 Books & Stationery</li>
+      </ul>
+    </aside>
+
+    <div class="flash-banner">
+      <h1>Big flash sale!</h1>
+      <p>Up to 50% off on phones, fashion and electronics. Today only!</p>
+      <button onclick="document.getElementById('product-list').scrollIntoView()">Shop Now</button>
+    </div>
+  </div>
+
+  <!-- Flash Sale Countdown Bar -->
+  <div class="flash-bar">
+    ⚡ Flash sale Ends in <span id="timer">04:23:59</span>
+  </div>
+
+  <!-- Product Grid -->
+  <div class="product-grid" id="product-list">
+    <div class="product-card" data-name="Android Smartphone">
+      <div class="img-placeholder">📱</div>
+      <h3>Android Smartphone</h3>
+      <p class="price">KSh 15,000</p>
+      <button onclick="addToCart('Android Smartphone')">Add to Cart</button>
+    </div>
+
+    <div class="product-card" data-name="Wireless Headphones">
+      <div class="img-placeholder">🎧</div>
+      <h3>Wireless Headphones</h3>
+      <p class="price">KSh 2,500</p>
+      <button onclick="addToCart('Wireless Headphones')">Add to Cart</button>
+    </div>
+
+    <div class="product-card" data-name="Men Sneakers">
+      <div class="img-placeholder">👟</div>
+      <h3>Men's Casual Sneakers</h3>
+      <p class="price">KSh 3,200</p>
+      <button onclick="addToCart('Men Sneakers')">Add to Cart</button>
+    </div>
+
+    <div class="product-card" data-name="Electric Kettle">
+      <div class="img-placeholder">🫖</div>
+      <h3>Electric Kettle</h3>
+      <p class="price">KSh 1,800</p>
+      <button onclick="addToCart('Electric Kettle')">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    copyright © 2026 KENSHOP. All rights reserved. | Pay on delivery | Free returns within 3 days
+  </footer>
+
+  <!-- Links your JavaScript file (Always at the bottom before </body>) -->
+  <script src="script.js"></script>
+</body>
+</html>
