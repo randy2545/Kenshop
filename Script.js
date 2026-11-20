@@ -1,52 +1,136 @@
-// 1. Live Countdown Timer
-let time = 4 * 3600 + 23 * 60 + 59;
-setInterval(() => {
-  if (time <= 0) return;
-  time--;
-  let hrs = String(Math.floor(time / 3600)).padStart(2, '0');
-  let mins = String(Math.floor((time % 3600) / 60)).padStart(2, '0');
-  let secs = String(time % 60).padStart(2, '0');
-  document.getElementById('timer').innerText = `${hrs}:${mins}:${secs}`;
-}, 1000);
+import { initializeApp } from "https://gstatic.com";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from "https://gstatic.com";
 
-// 2. Real Shopping Cart Array
-let cart = [];
+// ==========================================
+// 1. LIVE PRODUCT SEARCH FUNCTIONALITY
+// ==========================================
+const searchInput = document.getElementById('searchInput');
+const productCards = document.querySelectorAll('.product-card');
+const noResultsMsg = document.getElementById('noResultsMsg');
 
-function addToCart(productName, price) {
-  cart.push({ name: productName, price: price });
-  document.getElementById('cart-count').innerText = cart.length;
-  alert(`${productName} (KSh ${price.toLocaleString()}) added to cart!`);
+if (searchInput) {
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase().trim();
+    let visibleCount = 0;
+
+    productCards.forEach((card) => {
+      const cardText = card.textContent.toLowerCase();
+      if (cardText.includes(query)) {
+        card.style.display = 'flex';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    noResultsMsg.style.display = visibleCount === 0 ? 'block' : 'none';
+  });
 }
 
-// 3. Checkout via WhatsApp (Triggered when clicking top Cart button)
-document.querySelector('.cart-btn').addEventListener('click', () => {
-  if (cart.length === 0) {
-    alert("Your cart is empty!");
+// ==========================================
+// 2. MODAL POPUP CONTROLS
+// ==========================================
+const authModal = document.getElementById('authModal');
+const openAuthBtn = document.getElementById('openAuthBtn');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const authMessage = document.getElementById('authMessage');
+
+openAuthBtn.addEventListener('click', () => {
+  authMessage.textContent = '';
+  authModal.style.display = 'flex';
+});
+
+closeModalBtn.addEventListener('click', () => {
+  authModal.style.display = 'none';
+});
+
+window.addEventListener('click', (e) => {
+  if (e.target === authModal) {
+    authModal.style.display = 'none';
+  }
+});
+
+// ==========================================
+// 3. FIREBASE SIGN UP & LOG IN
+// ==========================================
+// REPLACE THIS OBJECT WITH YOUR FIREBASE CONFIG FROM ://google.com
+const firebaseConfig = {
+  apiKey: "PASTE_YOUR_API_KEY_HERE",
+  authDomain: "PASTE_YOUR_AUTH_DOMAIN_HERE",
+  projectId: "PASTE_YOUR_PROJECT_ID_HERE",
+  storageBucket: "PASTE_YOUR_STORAGE_BUCKET_HERE",
+  messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID_HERE",
+  appId: "PASTE_YOUR_APP_ID_HERE"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const emailInput = document.getElementById('authEmail');
+const passwordInput = document.getElementById('authPassword');
+const signUpBtn = document.getElementById('signUpBtn');
+const loginBtn = document.getElementById('loginBtn');
+const logoutBtn = document.getElementById('logoutBtn');
+const userGreeting = document.getElementById('userGreeting');
+
+// Create Account (Sign Up)
+signUpBtn.addEventListener('click', async () => {
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
+
+  if (!email || password.length < 6) {
+    authMessage.style.color = '#dc2626';
+    authMessage.textContent = 'Enter a valid email and a password of at least 6 characters.';
     return;
   }
 
-  let total = 0;
-  let orderList = "Hello KENshop! I would like to order:\n\n";
-  
-  cart.forEach((item, index) => {
-    orderList += `${index + 1}. ${item.name} - KSh ${item.price.toLocaleString()}\n`;
-    total += item.price;
-  });
-
-  orderList += `\nTotal: KSh ${total.toLocaleString()}\nPayment: Pay on Delivery`;
-
-  // Replace 254700000000 with your real Kenyan WhatsApp phone number
-  let phone = "254700000000"; 
-  let whatsappURL = `https://wa.me{phone}?text=${encodeURIComponent(orderList)}`;
-  window.open(whatsappURL, '_blank');
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+    authMessage.style.color = '#059669';
+    authMessage.textContent = 'Account created! Logging you in...';
+    setTimeout(() => { authModal.style.display = 'none'; }, 1000);
+  } catch (error) {
+    authMessage.style.color = '#dc2626';
+    authMessage.textContent = error.message;
+  }
 });
 
-// 4. Live Search Bar Filter
-function searchProducts() {
-  let input = document.getElementById('search-input').value.toLowerCase();
-  let cards = document.querySelectorAll('.product-card');
-  cards.forEach(card => {
-    let productName = card.getAttribute('data-name').toLowerCase();
-    card.style.display = productName.includes(input) ? 'block' : 'none';
-  });
-}
+// Log In
+loginBtn.addEventListener('click', async () => {
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    authMessage.style.color = '#059669';
+    authMessage.textContent = 'Welcome back!';
+    setTimeout(() => { authModal.style.display = 'none'; }, 800);
+  } catch (error) {
+    authMessage.style.color = '#dc2626';
+    authMessage.textContent = 'Invalid email or password.';
+  }
+});
+
+// Log Out
+logoutBtn.addEventListener('click', async () => {
+  await signOut(auth);
+});
+
+// Listen for Login State Changes
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    userGreeting.textContent = `Hi, ${user.email.split('@')[0]}`;
+    openAuthBtn.style.display = 'none';
+    logoutBtn.style.display = 'inline-block';
+  } else {
+    userGreeting.textContent = '';
+    openAuthBtn.style.display = 'inline-block';
+    logoutBtn.style.display = 'none';
+  }
+});
